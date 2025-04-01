@@ -1,0 +1,17 @@
+# Sử dụng base image golang để build
+FROM golang:1.21 AS build
+
+# Thiết lập thư mục làm việc
+WORKDIR /usr/src/app
+
+# Sao chép mã nguồn và build
+COPY . .
+RUN go mod init my-go-app
+RUN go build -o my-go-app
+
+# Sử dụng image thứ hai để chạy ứng dụng
+FROM alpine:latest
+WORKDIR /app
+COPY --from=build /usr/src/app/my-go-app .
+EXPOSE 8080
+CMD ["./my-go-app"]

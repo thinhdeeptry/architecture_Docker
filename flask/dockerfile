@@ -1,0 +1,18 @@
+# Sử dụng base image python:3.9
+FROM python:3.9
+
+# Thiết lập thư mục làm việc
+WORKDIR /usr/src/app
+
+# Sao chép file requirements.txt và cài đặt dependency
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Sao chép toàn bộ mã nguồn
+COPY . .
+
+# Mở cổng 5000
+EXPOSE 5000
+
+# Chạy ứng dụng
+CMD ["python", "app.py"]

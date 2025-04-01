@@ -1,0 +1,8 @@
+# Sử dụng base image nginx:latest
+FROM nginx:latest
+
+# Sao chép file index.html vào thư mục phục vụ của Nginx
+COPY index.html /usr/share/nginx/html/index.html
+
+# Mở cổng 80
+EXPOSE 80
